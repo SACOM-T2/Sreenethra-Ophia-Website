@@ -1,658 +1,174 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ophia — Eye Hospital Software</title>
-<meta name="description" content="Ophia is hospital software built for eye care: one patient record from the front desk to discharge.">
+<meta name="description" content="Ophia runs an eye hospital in one system: front desk, optometry, doctors, nurses, counselling, theatre, ward and a patient app on one record.">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#ffffff; --bg-soft:#f4f8fa; --bg-card:#ffffff; --ink:#0d1b2a; --muted:#566779; --line:#e1e8ee;
-  --brand:#0aa5c2; --brand-ink:#06657a; --brand-soft:#e3f6fa; --accent:#2563eb;
-  --ok:#0f9d6b; --ok-soft:#e3f6ee; --warn:#b26a00; --warn-soft:#fff3dc; --plan:#6b5bd2; --plan-soft:#eeebfb;
-  --shadow:0 1px 2px rgba(13,27,42,.06),0 12px 32px -12px rgba(13,27,42,.18);
-  --radius:14px; --max:1180px;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0a131d; --bg-soft:#0f1b28; --bg-card:#122030; --ink:#e7eef5; --muted:#9db0c3; --line:#1f3043;
-    --brand:#3cc8e4; --brand-ink:#8fe3f3; --brand-soft:#0f2a35; --accent:#6c9cff;
-    --ok:#3fd19a; --ok-soft:#10291f; --warn:#f0b450; --warn-soft:#2c2210; --plan:#a99cff; --plan-soft:#1d1a35;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -16px rgba(0,0,0,.6);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0a131d; --bg-soft:#0f1b28; --bg-card:#122030; --ink:#e7eef5; --muted:#9db0c3; --line:#1f3043;
-  --brand:#3cc8e4; --brand-ink:#8fe3f3; --brand-soft:#0f2a35; --accent:#6c9cff;
-  --ok:#3fd19a; --ok-soft:#10291f; --warn:#f0b450; --warn-soft:#2c2210; --plan:#a99cff; --plan-soft:#1d1a35;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -16px rgba(0,0,0,.6);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-img,video{max-width:100%;display:block}
-a{color:inherit}
-h1,h2,h3{font-family:"Inter Tight",Inter,system-ui,sans-serif;letter-spacing:-.02em;margin:0}
-h1{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.05;font-weight:700}
-h2{font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.15;font-weight:700}
-h3{font-size:1.15rem;line-height:1.3;font-weight:600}
-p{margin:0}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-section{padding:96px 0}
-.soft{background:var(--bg-soft)}
-.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink)}
-.lead{font-size:1.15rem;color:var(--muted);max-width:62ch}
-.sec-head{display:grid;gap:14px;margin-bottom:48px;max-width:760px}
-
-/* nav */
-.nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
-.logo{display:flex;align-items:center;gap:10px;font-family:"Inter Tight";font-weight:700;font-size:1.15rem;text-decoration:none}
-.ring{width:26px;height:26px;border-radius:50%;border:4px solid var(--brand);border-right-color:#7be0f0;flex:none}
-.nav nav{display:flex;gap:22px;margin-left:auto;font-size:.92rem}
-.nav nav a{text-decoration:none;color:var(--muted)}
-.nav nav a:hover{color:var(--ink)}
-.theme{border:1px solid var(--line);background:var(--bg-card);color:var(--ink);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:15px}
-
-/* hero */
-.hero{padding:72px 0 88px;overflow:hidden;position:relative}
-.hero::before{content:"";position:absolute;inset:-30% -10% auto auto;width:720px;height:720px;border-radius:50%;
-  background:radial-gradient(circle,color-mix(in srgb,var(--brand) 22%,transparent),transparent 65%);pointer-events:none}
-.hero .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center;position:relative}
-.hero h1 em{font-style:normal;color:var(--brand)}
-.hero .lead{margin:22px 0 30px}
-.ctas{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none;font-size:.95rem;border:1px solid transparent}
-.btn.primary{background:var(--ink);color:var(--bg)}
-.btn.ghost{border-color:var(--line);background:var(--bg-card)}
-.note{margin-top:22px;font-size:.85rem;color:var(--muted);display:flex;gap:8px;align-items:center}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
-.stage{position:relative;padding-bottom:40px}
-.browser{border-radius:12px;background:var(--bg-card);box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden}
-.browser .bar{height:30px;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line);background:var(--bg-soft)}
-.browser .bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
-.browser .bar span{margin-left:10px;font-size:.72rem;color:var(--muted)}
-.phone{position:absolute;right:-12px;bottom:0;width:31%;border-radius:26px;border:7px solid #0d1b2a;background:#fff;overflow:hidden;box-shadow:var(--shadow)}
-.phone img{aspect-ratio:390/600;object-fit:cover;object-position:top}
-
-/* facts */
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.fact{background:var(--bg-card);padding:26px 24px}
-.fact b{display:block;font-family:"Inter Tight";font-size:2rem;line-height:1.1;letter-spacing:-.02em}
-.fact span{color:var(--muted);font-size:.92rem}
-
-/* problem */
-.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-.card h3{margin-bottom:8px}
-.card p{color:var(--muted);font-size:.96rem}
-.ico{width:40px;height:40px;border-radius:10px;background:var(--brand-soft);color:var(--brand-ink);display:grid;place-items:center;margin-bottom:16px}
-.ico svg{width:20px;height:20px}
-
-/* journey */
-.journey{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;position:relative}
-.step{background:var(--bg-card);border:1px solid var(--line);border-radius:12px;padding:14px 12px;position:relative;min-height:128px}
-.step .n{font-size:.72rem;font-weight:600;color:var(--brand-ink)}
-.step h3{font-size:.98rem;margin:4px 0 6px}
-.step p{font-size:.8rem;color:var(--muted);line-height:1.45}
-.step:not(:last-child)::after{content:"";position:absolute;right:-9px;top:50%;width:8px;height:8px;border-top:2px solid var(--brand);border-right:2px solid var(--brand);transform:translateY(-50%) rotate(45deg);z-index:2}
-.step.surg{border-color:color-mix(in srgb,var(--brand) 45%,var(--line))}
-.lanes{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-top:10px}
-.lane{border-radius:10px;padding:10px 14px;font-size:.84rem;display:flex;gap:10px;align-items:center}
-.lane b{font-weight:600}
-.lane.patient{grid-column:1/-1;background:var(--plan-soft);color:var(--ink)}
-.lane.nurse{grid-column:2/9;background:var(--ok-soft)}
-.lane.ns{grid-column:4/6;background:var(--warn-soft)}
-.lane.surgbar{grid-column:5/9;background:var(--brand-soft)}
-.lane .tag{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;opacity:.75;white-space:nowrap}
-.caption{margin-top:16px;color:var(--muted);font-size:.92rem}
-
-/* tour */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
-.tab{border:1px solid var(--line);background:var(--bg-card);color:var(--muted);border-radius:999px;padding:8px 16px;font:500 .9rem Inter,sans-serif;cursor:pointer}
-.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.panel{display:none;grid-template-columns:.8fr 1.6fr;gap:40px;align-items:start}
-.panel.on{display:grid}
-.panel h3{font-size:1.6rem;margin-bottom:12px}
-.panel .who{font-size:.85rem;color:var(--brand-ink);font-weight:600;margin-bottom:6px}
-.panel ul{padding:0;margin:18px 0 0;list-style:none;display:grid;gap:12px}
-.panel li{padding-left:26px;position:relative;font-size:.96rem;color:var(--muted)}
-.panel li b{color:var(--ink);font-weight:600}
-.panel li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2px solid var(--brand);border-bottom:2px solid var(--brand);transform:rotate(-45deg)}
-.viewer .main{cursor:zoom-in}
-.viewer figcaption{font-size:.85rem;color:var(--muted);margin-top:12px;min-height:1.4em}
-.thumbs{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-.thumbs button{border:2px solid transparent;padding:0;border-radius:8px;overflow:hidden;cursor:pointer;background:none;width:118px;opacity:.7}
-.thumbs button[aria-current="true"]{border-color:var(--brand);opacity:1}
-.thumbs img{aspect-ratio:16/10;object-fit:cover;object-position:top}
-.pair{display:grid;grid-template-columns:1.7fr .55fr;gap:20px;align-items:end}
-.pair .phone{position:static;width:100%}
-.pp-card{background:linear-gradient(160deg,var(--plan-soft),var(--brand-soft));border-radius:var(--radius);padding:30px;border:1px solid var(--line)}
-.pp-card .row{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem}
-.pp-card .row:last-child{border:0}
-.pill{font-size:.72rem;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap}
-.pill.ok{background:var(--ok-soft);color:var(--ok)}
-.pill.warn{background:var(--warn-soft);color:var(--warn)}
-.pill.plan{background:var(--plan-soft);color:var(--plan)}
-.pill.rev{background:var(--brand-soft);color:var(--brand-ink)}
-.pp-card .row .pill{margin-left:auto}
-
-/* videos */
-.vids{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.vid{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.vid.big{grid-column:1/-1;display:grid;grid-template-columns:1.7fr 1fr}
-.vid video{width:100%;aspect-ratio:16/10;background:#0d1b2a;object-fit:cover}
-.vid .meta{padding:18px 22px 22px}
-.vid.big .meta{padding:32px;align-self:center}
-.vid .meta p{color:var(--muted);font-size:.92rem;margin-top:6px}
-.vid ol{margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:.9rem;display:grid;gap:4px}
-.len{font-size:.75rem;color:var(--muted);font-weight:500;margin-left:6px}
-
-/* eye-care specifics */
-.grid2{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.spec{padding:24px;border-top:3px solid var(--brand);background:var(--bg-card);border-radius:0 0 var(--radius) var(--radius);border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.spec h3{margin-bottom:8px}
-.spec p{color:var(--muted);font-size:.94rem}
-
-/* safety */
-.safety{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
-.checks{display:grid;gap:14px}
-.check{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
-.check p{color:var(--muted);font-size:.94rem}
-.check h3{font-size:1.02rem;margin-bottom:2px}
-.zoomable{cursor:zoom-in}
-
-/* status */
-table{width:100%;border-collapse:collapse;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.95rem}
-th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;background:var(--bg-soft)}
-tr:last-child td{border-bottom:0}
-td:first-child{font-weight:600;width:30%}
-td:last-child{color:var(--muted)}
-
-/* roadmap */
-.road{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
-.phase{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-.phase .when{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.phase ul{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:8px;font-size:.95rem}
-.phase ul b{color:var(--ink);font-weight:600}
-
-/* deploy */
-.deploy{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-
-footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
-footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
-
-/* lightbox */
-.lb{position:fixed;inset:0;background:rgba(5,12,20,.88);display:none;align-items:center;justify-content:center;z-index:100;padding:32px;cursor:zoom-out}
-.lb.on{display:flex}
-.lb img{max-height:92vh;width:auto;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.lb p{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#cfdbe6;font-size:.9rem}
-
-@media (max-width:980px){
-  .hero .wrap,.panel.on,.safety,.vid.big{grid-template-columns:1fr}
-  .facts{grid-template-columns:repeat(2,1fr)}
-  .cards3,.grid2,.road,.deploy{grid-template-columns:1fr 1fr}
-  .journey{grid-template-columns:repeat(4,1fr)}
-  .step:nth-child(4)::after{display:none}
-  .lanes{grid-template-columns:1fr}
-  .lane.patient,.lane.nurse,.lane.ns,.lane.surgbar{grid-column:auto}
-  .nav nav{display:none}
-}
-@media (max-width:640px){
-  .wrap{padding:0 16px}
-  section{padding:64px 0}
-  .facts,.cards3,.grid2,.road,.deploy,.vids{grid-template-columns:1fr}
-  .journey{grid-template-columns:1fr 1fr}
-  .step::after{display:none}
-  .pair{grid-template-columns:1fr}
-  .pair .phone{max-width:260px;margin:0 auto}
-  td:first-child{width:auto}
-  th:nth-child(3),td:nth-child(3){display:none}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+  // Theme and loader are set before first paint, so nothing flashes.
+  try {
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('is-loading');
+    var t = localStorage.getItem('ophia-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
 </head>
 <body>
 
-<header class="nav">
+<div class="loader" aria-hidden="true">
+  <svg viewBox="0 0 120 120" class="loader-ring">
+    <defs>
+      <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#14d6e8"/><stop offset=".55" stop-color="#00c2c7"/><stop offset="1" stop-color="#0a74de"/>
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="60" r="42" fill="none" stroke="url(#ring-grad)" stroke-width="16" stroke-linecap="round" pathLength="100" stroke-dasharray="88 12"/>
+  </svg>
+  <span class="loader-word">Ophia</span>
+</div>
+
+<header class="top">
   <div class="wrap">
-    <a class="logo" href="#top"><span class="ring"></span>Ophia</a>
-    <nav>
-      <a href="#problem">Why</a>
-      <a href="#journey">Journey</a>
-      <a href="#tour">Product</a>
-      <a href="#demos">See it work</a>
-      <a href="#safety">Safety</a>
-      <a href="#status">Status</a>
-      <a href="#roadmap">Roadmap</a>
+    <a class="brand" href="index.html"><img src="assets/img/ophia-logo.png" alt="" width="30" height="30">Ophia</a>
+    <nav class="menu" id="menu" aria-label="Main">
+      <a href="product.html">Product</a>
+      <a href="patient-app.html">Patient app</a>
+      <a href="why-ophia.html">Why Ophia</a>
+      <a href="hosting.html">Hosting &amp; security</a>
     </nav>
-    <button class="theme" id="theme" aria-label="Switch light or dark">◐</button>
+    <a class="btn small fill nav-cta" href="product.html#watch">Watch it run</a>
+    <button class="icon-btn" id="theme" aria-label="Switch between light and dark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
 </header>
 
-<main id="top">
-
-<!-- HERO -->
+<main id="main">
 <section class="hero">
   <div class="wrap">
     <div>
-      <p class="eyebrow">Hospital software for eye care</p>
-      <h1 style="margin-top:14px">One record for every eye, <em>from the front desk to discharge.</em></h1>
-      <p class="lead">Ophia runs an eye hospital in one system. Front desk, eye tests, doctors, nurses, surgical counselling, theatre and ward all work in the same patient file. The safety checks surgery needs are built in.</p>
+      <div class="ring3d" id="ring3d" aria-hidden="true"></div>
+      <p class="label">Software for eye hospitals</p>
+      <h1>One system for the whole eye hospital.</h1>
+      <p class="sub">Ophia puts the front desk, optometry, doctors, nurses, surgical counselling, theatre and ward on one patient record. Patients book, follow their visit and keep their prescriptions in the Ophia app.</p>
       <div class="ctas">
-        <a class="btn primary" href="#demos">▶ Watch it work</a>
-        <a class="btn ghost" href="#tour">Tour the product</a>
+        <a class="btn fill" href="#journey"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>Follow a patient</a>
+        <a class="btn" href="product.html#watch">Watch it run</a>
       </div>
-      <p class="note"><span class="dot"></span>Every screen on this page is the real software, recorded on demo patients.</p>
     </div>
-    <div class="stage">
-      <div class="browser">
-        <div class="bar"><i></i><i></i><i></i><span>Patient summary · every visit, surgery and prescription on one page</span></div>
-        <img class="zoomable" src="assets/shots/dr_summary_shiyas.webp" alt="Patient summary showing visits, findings for both eyes, diagnosis and prescriptions" data-cap="Patient summary: both eyes side by side, with every visit, test, procedure and prescription.">
+    <div class="scene">
+      <div class="window">
+        <div class="bar"><i></i><i></i><i></i><span id="heroPath">/dashboard/consultation</span></div>
+        <div class="stack" id="heroDesk" data-zoom></div>
       </div>
-      <div class="phone"><img src="assets/shots/phone_upload.webp" alt="Phone upload page for an old medical record"></div>
+      <div class="handset"><div class="stack" id="heroPhone" data-zoom></div></div>
+      <div class="tag"><b></b><span id="heroTag">Doctor · both eyes side by side</span></div>
     </div>
   </div>
+  <div class="roles"><div class="wrap">
+    <span>Front desk</span><span>Optometry</span><span>Investigations</span><span>Doctors</span><span>Nurses</span><span>Counselling</span><span>Theatre</span><span>Ward</span><span>Patients</span>
+  </div></div>
 </section>
 
-<!-- FACTS -->
-<div class="wrap" style="margin-top:-24px">
-  <div class="facts">
-    <div class="fact"><b>10 portals</b><span>One for each role, from the front desk to the patient's own app</span></div>
-    <div class="fact"><b>1 patient file</b><span>History, tests, drawings, prescriptions and surgery, shared by every desk</span></div>
-    <div class="fact"><b>3 checklists</b><span>13 ward checks, 20 pre-op checks, and a sign-in, time-out and sign-out in theatre</span></div>
-    <div class="fact"><b>15-min QR links</b><span>Phone photos of consents and old records go straight into the file</span></div>
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<section id="problem">
+<section class="sec" id="journey">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Why Ophia</p>
-      <h2>Eye hospitals outgrow paper files and general hospital software.</h2>
-      <p class="lead">An eye patient's day crosses six or more desks. Each desk records something the next one needs, usually on paper or in a system that was not designed for eyes.</p>
-    </div>
-    <div class="cards3">
-      <div class="card">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><path d="M11 12h2"/></svg></div>
-        <h3>Two eyes, every field</h3>
-        <p>General software stores one value where an eye clinic needs right and left eye readings, refraction, eye pressure and drawings. Doctors end up writing in free text, or on paper.</p>
-      </div>
-      <div class="card">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6"/></svg></div>
-        <h3>The file travels by hand</h3>
-        <p>A surgical patient passes the front desk, eye tests, the doctor, counselling, the ward and theatre. Each step copies details into its own register, and mistakes creep in.</p>
-      </div>
-      <div class="card">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Safety lives on paper</h3>
-        <p>Consent forms, surgical checklists and implant records kept on paper are hard to check before surgery and hard to audit afterwards.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JOURNEY -->
-<section id="journey" class="soft">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">The patient journey</p>
-      <h2>Every step of the visit, in one connected record.</h2>
-      <p class="lead">Each desk has its own screen, built around its own work. The patient file moves with the patient, so nothing is re-typed.</p>
+    <div class="head">
+      <p class="label">Follow a patient</p>
+      <h2>From the first booking to the follow-up, on one record.</h2>
+      <p>Each desk has its own screen, built around its own work, and sees what the last desk recorded. Pick a step or let it play. Move over a screen to look closer, and click to enlarge it.</p>
     </div>
     <div class="journey">
-      <div class="step"><span class="n">01</span><h3>Register</h3><p>Front desk registers, books the doctor's slot and runs the wait list.</p></div>
-      <div class="step"><span class="n">02</span><h3>Eye tests</h3><p>Optometry records vision and refraction. The lab and scans run their own queue.</p></div>
-      <div class="step"><span class="n">03</span><h3>Consultation</h3><p>The doctor examines both eyes, diagnoses, orders tests and prescribes.</p></div>
-      <div class="step surg"><span class="n">04</span><h3>Counselling</h3><p>Surgery is planned and priced, consent is taken, and the date is booked.</p></div>
-      <div class="step surg"><span class="n">05</span><h3>Ward prep</h3><p>Nurses work through a 13-point ward checklist before theatre.</p></div>
-      <div class="step surg"><span class="n">06</span><h3>Theatre</h3><p>A 20-point pre-op check, a safety checklist, implants and the operative record.</p></div>
-      <div class="step surg"><span class="n">07</span><h3>Discharge</h3><p>The ward prepares the discharge summary, and the surgeon signs it.</p></div>
-      <div class="step"><span class="n">08</span><h3>Follow-up</h3><p>The next visit opens with the full history and summary.</p></div>
-    </div>
-    <div class="lanes">
-      <div class="lane patient"><span class="tag">Patient app</span><span>Patients book, see their prescriptions and reports, and pay online (payments and SMS log-in are awaiting approvals).</span></div>
-      <div class="lane nurse"><span class="tag">Nurses</span><span>Nurses support every doctor's queue, with dilation, pre-op prep, the patient summary and printing.</span></div>
-      <div class="lane ns"><span class="tag">Same-day</span><span>Lasers and minor procedures</span></div>
-      <div class="lane surgbar"><span class="tag">Surgical path</span><span>Consent is checked before theatre can start.</span></div>
-    </div>
-    <p class="caption">Steps 04 to 07 apply only to patients who need surgery. Every other patient goes from consultation straight to follow-up.</p>
-  </div>
-</section>
-
-<!-- TOUR -->
-<section id="tour">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Product tour</p>
-      <h2>Built around the people who use it.</h2>
-      <p class="lead">Pick a role to see its screens. Click any screen to enlarge it.</p>
-    </div>
-    <div class="tabs" role="tablist" id="tabs"></div>
-    <div id="panels"></div>
-  </div>
-</section>
-
-<!-- DEMOS -->
-<section id="demos" class="soft">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">See it work</p>
-      <h2>Real screen recordings, not mock-ups.</h2>
-      <p class="lead">Each clip was recorded on the software as it runs today, using the demo patients Arjun P and Shiyas.</p>
-    </div>
-    <div class="vids">
-      <div class="vid big">
-        <video src="assets/video/consultation.mp4" poster="assets/video/consultation.jpg" controls muted playsinline preload="metadata"></video>
-        <div class="meta">
-          <h3>A doctor's consultation <span class="len">38 s</span></h3>
-          <p>From history to prescription, in one patient file.</p>
-          <ol>
-            <li>Patient history and background</li>
-            <li>Both eyes' findings, with diagnosis codes</li>
-            <li>Drawing on the cornea chart</li>
-            <li>The plan: medicines, tests and procedures, including what another doctor prescribed today</li>
-            <li>The summary of every visit</li>
-          </ol>
-        </div>
-      </div>
-      <div class="vid">
-        <video src="assets/video/theatre.mp4" poster="assets/video/theatre.jpg" controls muted playsinline preload="metadata"></video>
-        <div class="meta"><h3>Theatre safety <span class="len">30 s</span></h3><p>The 20-point pre-op checklist, the sign-in and time-out, the implant log, and a locked operative record.</p></div>
-      </div>
-      <div class="vid">
-        <video src="assets/video/ward.mp4" poster="assets/video/ward.jpg" controls muted playsinline preload="metadata"></video>
-        <div class="meta"><h3>The ward <span class="len">18 s</span></h3><p>The bed board, an admission, the ward checklist, the operative record and the discharge summary.</p></div>
-      </div>
-      <div class="vid">
-        <video src="assets/video/counselling.mp4" poster="assets/video/counselling.jpg" controls muted playsinline preload="metadata"></video>
-        <div class="meta"><h3>Surgical counselling <span class="len">8 s</span></h3><p>From the case list to the counselling record, sessions and the surgical plan.</p></div>
-      </div>
-      <div class="vid">
-        <video src="assets/video/qr.mp4" poster="assets/video/qr.jpg" controls muted playsinline preload="metadata"></video>
-        <div class="meta"><h3>Records from a phone <span class="len">8 s</span></h3><p>One click shows a QR code. Staff scan it, photograph the paper record, and it appears in the file.</p></div>
-      </div>
+      <div class="steps" id="steps"></div>
+      <div class="stage" id="stage"></div>
     </div>
   </div>
 </section>
 
-<!-- EYE-CARE SPECIFICS -->
-<section id="eyecare">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Made for ophthalmology</p>
-      <h2>Details a general hospital system doesn't have.</h2>
+<section class="sec tint">
+  <div class="wrap split">
+    <div class="handset" style="max-width:330px;margin:0 auto;border-width:10px;border-radius:40px">
+      <video src="assets/video/patientapp.mp4" poster="assets/video/patientapp.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Recording of the patient app" style="width:100%;aspect-ratio:390/844;object-fit:cover"></video>
     </div>
-    <div class="grid2">
-      <div class="spec"><h3>Right and left, side by side</h3><p>Vision, refraction, eye pressure, findings and diagnosis are recorded for each eye. Normal findings take one click, and can be copied to the other eye.</p></div>
-      <div class="spec"><h3>Drawings on eye charts</h3><p>Doctors draw on charts of the cornea, lids, anterior segment, gonioscopy and fundus. The hospital's own chart set is built in.</p></div>
-      <div class="spec"><h3>Eye diagnosis codes, offline</h3><p>ICD-10 eye codes can be searched instantly from the hospital's own list, with no internet needed.</p></div>
-      <div class="spec"><h3>Prescriptions that add up</h3><p>Eye-drop tapers always fit inside the course length. Each patient gets one prescription per day, even when several doctors see them.</p></div>
-      <div class="spec"><h3>Implant traceability</h3><p>Every lens implanted is logged with its model, power, serial number, lot and expiry date.</p></div>
-      <div class="spec"><h3>Nothing typed twice</h3><p>Anything already recorded at another desk is filled in for you, and you can still edit it. The surgical safety checklist is never pre-filled.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- SAFETY -->
-<section id="safety" class="soft">
-  <div class="wrap safety">
     <div>
-      <div class="sec-head" style="margin-bottom:28px">
-        <p class="eyebrow">Safety and trust</p>
-        <h2>Checks are built into the workflow, not left on a clipboard.</h2>
+      <div class="head" style="margin-bottom:8px">
+        <p class="label">The Ophia app</p>
+        <h2>Patients see their visit as it happens.</h2>
+        <p>The app runs on the same record the hospital uses, so what the doctor writes is what the patient sees.</p>
       </div>
-      <div class="checks">
-        <div class="check"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div><div><h3>Theatre waits for the ward</h3><p>The pre-op checklist only opens once the ward checklist is complete, and surgery can't start without recorded consent.</p></div></div>
-        <div class="check"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><h3>Records lock after a set time</h3><p>After a set editing window, clinical records lock. Only an administrator can reopen them, and must give a reason.</p></div></div>
-        <div class="check"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><div><h3>Each role sees its own work</h3><p>Portals and permissions follow the job. For example, ward nurses can write operative notes, but only the surgeon can change the case itself.</p></div></div>
-        <div class="check"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><div><h3>Phone uploads expire</h3><p>Each QR upload link is signed for one patient and expires in 15 minutes. Files go into the record, not into staff phones' chats.</p></div></div>
-      </div>
-    </div>
-    <div class="browser">
-      <div class="bar"><i></i><i></i><i></i><span>Operating theatre · operative record, locked after its editing window</span></div>
-      <img class="zoomable" src="assets/shots/ot_oprecord.webp" alt="Locked operative record in the theatre portal" data-cap="The operative record locks after its editing window. Only an administrator can reopen it.">
+      <ul class="ticks">
+        <li><span><b>Book and pay online</b> with the doctor and slot they choose.</span></li>
+        <li><span><b>Their place in the queue</b> on the day, step by step.</span></li>
+        <li><span><b>Prescriptions with eye-drop instructions</b>, and reports once the doctor releases them.</span></li>
+        <li><span><b>Family access</b> to look after a parent's or child's record.</span></li>
+      </ul>
+      <div class="ctas"><a class="btn" href="patient-app.html">Explore the app</a></div>
     </div>
   </div>
 </section>
 
-<!-- STATUS -->
-<section id="status">
+<section class="sec">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Where we are</p>
-      <h2>What is built, what is in review, and what comes next.</h2>
-      <p class="lead">Status as of 26 October 2026.</p>
+    <div class="head">
+      <p class="label">Why Ophia</p>
+      <h2>Built for how an eye hospital actually works.</h2>
     </div>
-    <table>
-      <thead><tr><th>Area</th><th>Status</th><th>Detail</th></tr></thead>
-      <tbody>
-        <tr><td>Front desk, eye tests, investigations, doctor and nurse portals</td><td><span class="pill ok">Built</span></td><td>The daily outpatient workflow, from registration to prescription.</td></tr>
-        <tr><td>Surgical pathway: counselling, theatre and ward</td><td><span class="pill ok">Built</span></td><td>Booking, consent, checklists, anaesthesia, implants, the operative record and discharge.</td></tr>
-        <tr><td>October release</td><td><span class="pill rev">In code review</span></td><td>QR uploads, the new pre-op and ward checklists, the operative record in theatre and ward, ICD-10 search, taper prescriptions and the patient summary.</td></tr>
-        <tr><td>Patient app</td><td><span class="pill warn">Awaiting approvals</span></td><td>Built. Online payments are waiting on Razorpay approval, and SMS log-in on TRAI DLT registration.</td></tr>
-        <tr><td>On-site installation, migrating old records, speed improvements</td><td><span class="pill warn">In final testing</span></td><td>Lets a hospital run Ophia on its own server and bring its existing records across.</td></tr>
-        <tr><td>AI assistants</td><td><span class="pill plan">Planned</span></td><td>See the roadmap below. Voice input and Ophia Insights are already in the consultation screen.</td></tr>
-      </tbody>
-    </table>
+    <div class="compare">
+      <div class="crow headrow"><span class="label">Area</span><span class="label">Common in eye-care software</span><span class="label">In Ophia</span></div>
+      <div class="crow"><h3>Scope</h3><p class="them">Clinic records that stop at the consultation room, with surgery on other systems.</p><p class="us"><b>One record from booking to discharge</b>, across every desk and the patient's phone.</p></div>
+      <div class="crow"><h3>Surgery</h3><p class="them">Pre-operative, operative and post-operative notes kept apart; safety checklists on paper.</p><p class="us"><b>One linked surgical path</b>, and theatre won't start a case without signed consent.</p></div>
+      <div class="crow"><h3>Two eyes</h3><p class="them">One field where the clinic needs a right and a left.</p><p class="us"><b>Right and left side by side</b> in every clinical field.</p></div>
+    </div>
+    <div class="ctas"><a class="btn" href="why-ophia.html">See the full comparison</a></div>
   </div>
 </section>
 
-<!-- ROADMAP -->
-<section id="roadmap" class="soft">
+<section class="sec tint">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Roadmap</p>
-      <h2>From a working product to a hospital going live.</h2>
-    </div>
-    <div class="road">
-      <div class="phase">
-        <div class="when"><span class="pill rev">Now</span><h3>Go-live readiness</h3></div>
-        <ul>
-          <li><b>Finish review</b> and release the October update</li>
-          <li><b>Secure file downloads</b> for uploaded records, open to signed-in staff only</li>
-          <li><b>On-site installation</b> with automatic backups to the hospital's NAS</li>
-        </ul>
+    <div class="band">
+      <div>
+        <h2>On your premises or in the cloud.</h2>
+        <p>The hospital chooses where its data lives. Staff use Ophia in a web browser, with nothing to install.</p>
       </div>
-      <div class="phase">
-        <div class="when"><span class="pill warn">Next</span><h3>Patients online</h3></div>
-        <ul>
-          <li><b>Online payments</b> through Razorpay</li>
-          <li><b>SMS log-in</b> and appointment reminders</li>
-          <li><b>WhatsApp</b> updates for patients</li>
-        </ul>
-      </div>
-      <div class="phase">
-        <div class="when"><span class="pill plan">Later</span><h3>AI that saves time</h3></div>
-        <ul>
-          <li><b>AI scribe</b> that drafts the consultation note for the doctor to check</li>
-          <li><b>Reading old paper records</b> into the patient file</li>
-          <li><b>Prescriptions in the patient's own language</b></li>
-        </ul>
+      <div class="ctas" style="margin:0">
+        <a class="btn fill" href="hosting.html">Hosting &amp; security</a>
+        <a class="btn" href="product.html#watch">Watch it run</a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- DEPLOY -->
-<section id="deploy">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">How it runs</p>
-      <h2>Runs in the browser, on a desktop app, and on a phone for uploads.</h2>
-    </div>
-    <div class="deploy">
-      <div class="card"><h3>In the hospital</h3><p>Ophia can run on a server inside the hospital, with backups to a network drive. Patient data stays on site.</p></div>
-      <div class="card"><h3>On every desk</h3><p>Staff use it in a web browser or as a Windows desktop app. Phones are needed only to scan QR codes and upload photos.</p></div>
-      <div class="card"><h3>Open and modern</h3><p>Built on Django and Next.js with a PostgreSQL database: standard tools that any good engineering team can maintain.</p></div>
-    </div>
-  </div>
-</section>
-
 </main>
 
-<footer>
+<footer class="foot">
   <div class="wrap">
-    <span><b style="color:var(--ink)">Ophia</b> · Eye hospital software</span>
-    <span>All screens show demo patients created for testing, not real patient data. Captured 26 October 2026 from the current build.</span>
+    <div>
+      <a class="brand" href="index.html"><img src="assets/img/ophia-logo.png" alt="" width="24" height="24">Ophia</a>
+      <p>Software for eye hospitals.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="product.html">Product</a>
+      <a href="patient-app.html">Patient app</a>
+      <a href="why-ophia.html">Why Ophia</a>
+      <a href="hosting.html">Hosting &amp; security</a>
+    </nav>
+    <p class="small-print">The patients and staff shown in screenshots and recordings are fictional.</p>
   </div>
 </footer>
 
-<div class="lb" id="lb" role="dialog" aria-label="Enlarged screen"><img alt=""><p></p></div>
+<div class="zoom" id="zoom" hidden role="dialog" aria-label="Enlarged screen"><img alt=""><p></p></div>
 
-<script>
-// Product tour content: each role, its points, and its screens (from assets/shots)
-const TOUR = [
-  { id:'front', tab:'Front desk', who:'Reception and front office',
-    title:'Registration and queues in minutes',
-    points:[
-      ['Six-step registration','for personal, address, identity, medical and admin details, with a summary to check'],
-      ['Appointments by doctor slot','with the MR number resolving the patient and refraction flagged for returning patients'],
-      ['Wait list, dilation queue, referrals and admissions','all on one dashboard'],
-    ],
-    shots:[['fo_registration','Six-step patient registration.'],['fo_new_appointment','Booking an appointment against the doctor\'s free slots.'],['fo_home','The front office dashboard.']] },
-  { id:'doctor', tab:'Doctor', who:'Ophthalmologists',
-    title:'A consultation screen built for two eyes',
-    points:[
-      ['Vision, refraction and eye pressure','for the right and left eye side by side'],
-      ['Findings and drawings','on the hospital\'s own eye charts, with ICD-10 diagnosis codes'],
-      ['Plan and prescription','with medicines, tests and procedures; tapers always fit the course'],
-      ['One summary','showing every visit, surgery and prescription'],
-    ],
-    shots:[['dr_findings','Findings for both eyes, with diagnosis codes.'],['dr_draw','Drawing on the cornea chart.'],['dr_advice_shiyas','The plan, including a medicine another doctor prescribed today.'],['dr_summary_shiyas','The patient summary across all visits.'],['dr_history','Patient history, and old records uploaded from paper.'],['dr_home','The doctor\'s home, with links to each portal.']] },
-  { id:'phone', tab:'Records by phone', who:'Any staff member',
-    title:'Paper records into the file, by phone',
-    points:[
-      ['Scan a QR code','shown next to the patient\'s record'],
-      ['Photograph each page or choose a PDF','and it lands in that patient\'s file'],
-      ['Used for consent forms, reports and old records','and each link expires in 15 minutes'],
-    ],
-    pair:['dr_qr','phone_upload','The QR code on the desk, and the upload page it opens on the phone.'] },
-  { id:'nurse', tab:'Nurses', who:'OPD nurses',
-    title:'Every doctor\'s queue, in one place',
-    points:[
-      ['Dashboard','showing today\'s patients, waits, urgent cases and tasks'],
-      ['The same patient summary','the doctor sees, plus printing of prescriptions'],
-      ['Pre-op preparation, dilation and same-day procedures','each from its own queue'],
-    ],
-    shots:[['nu_summary','The nurse\'s view of the patient summary.'],['nu_home','The nurse dashboard.']] },
-  { id:'counsel', tab:'Counselling', who:'Surgical counsellors',
-    title:'From "surgery advised" to a booked date',
-    points:[
-      ['Cases arrive from consultation','with a counselling number and the recommended surgery'],
-      ['Eye, anaesthesia, package, cost and insurance','with any number of counselling sessions'],
-      ['A surgical detail sheet','covering technique, lens type and add-ons, plus surgery and waiting lists and reports'],
-    ],
-    shots:[['co_case','A counselling case: cost, insurance, diagnosis and referral.'],['co_home','All counselling cases with their decision and status.']] },
-  { id:'theatre', tab:'Theatre', who:'Surgeons and OT staff',
-    title:'Every case checked before it starts',
-    points:[
-      ['A 20-point pre-op checklist','which opens only after the ward checklist is complete'],
-      ['A safety checklist','with sign-in, time-out and sign-out'],
-      ['Anaesthesia record and implant log','with serial number, lot and expiry'],
-      ['The operative record','which locks after its editing window'],
-    ],
-    shots:[['ot_preop','The pre-op checklist, after the ward checklist is complete.'],['ot_safety','The safety checklist: sign-in, time-out and sign-out.'],['ot_implants','Implant log with serial number, lot and expiry.'],['ot_oprecord','The operative record, locked after its window.']] },
-  { id:'ward', tab:'Ward', who:'Ward nurses',
-    title:'Beds, preparation and discharge',
-    points:[
-      ['A live bed board','by room and ward'],
-      ['A 13-point ward checklist','before the patient leaves for theatre'],
-      ['A discharge summary','that nurses prepare and the surgeon signs'],
-    ],
-    shots:[['wd_admission','An admission: the ward checklist and preparation status.'],['wd_board','The bed board.']] },
-  { id:'ns', tab:'Procedures', who:'Laser and procedure technicians',
-    title:'Same-day procedures, tracked',
-    points:[
-      ['A queue of today\'s procedures','such as lasers and injections, by doctor'],
-      ['A safety checklist and consent','with consent photographed from a phone'],
-      ['Start and finish times and notes','for each procedure'],
-    ],
-    shots:[['ns_procedure','A laser procedure in progress, with consent on file.'],['ns_queue','Today\'s procedure queue.']] },
-  { id:'patient', tab:'Patients', who:'Patients and families',
-    title:'The patient\'s own app',
-    points:[
-      ['Book appointments','and see upcoming visits'],
-      ['See prescriptions and reports','after each visit'],
-      ['Pay online','once the payment approval comes through'],
-    ],
-    patient:true },
-];
-
-const tabs = document.getElementById('tabs'), panels = document.getElementById('panels');
-const img = (k, cls='', cap='') => `<img class="${cls}" src="assets/shots/${k}.webp" alt="${cap.replace(/"/g,'&quot;')}" data-cap="${cap.replace(/"/g,'&quot;')}" loading="lazy">`;
-
-TOUR.forEach((t, i) => {
-  const b = document.createElement('button');
-  b.className = 'tab'; b.role = 'tab'; b.textContent = t.tab; b.setAttribute('aria-selected', i === 0);
-  b.onclick = () => select(i); tabs.appendChild(b);
-
-  let right;
-  if (t.pair) {
-    right = `<figure class="viewer" style="margin:0"><div class="pair">
-      <div class="browser"><div class="bar"><i></i><i></i><i></i></div>${img(t.pair[0],'main zoomable',t.pair[2])}</div>
-      <div class="phone">${img(t.pair[1],'zoomable',t.pair[2])}</div></div>
-      <figcaption>${t.pair[2]}</figcaption></figure>`;
-  } else if (t.patient) {
-    right = `<div class="pp-card">
-      <p class="eyebrow" style="margin-bottom:8px">Patient app</p>
-      <div class="row">Sign in with a mobile number and a one-time code<span class="pill warn">SMS approval pending</span></div>
-      <div class="row">Book and manage appointments<span class="pill ok">Built</span></div>
-      <div class="row">Fill in registration before arriving<span class="pill ok">Built</span></div>
-      <div class="row">Prescriptions, reports and surgeries after each visit<span class="pill ok">Built</span></div>
-      <div class="row">Family members linked to one account<span class="pill ok">Built</span></div>
-      <div class="row">Pay for visits and procedures online<span class="pill warn">Razorpay approval pending</span></div>
-      <div class="row">Reminders on WhatsApp<span class="pill plan">Planned</span></div></div>`;
-  } else {
-    right = `<figure class="viewer" style="margin:0">
-      <div class="browser"><div class="bar"><i></i><i></i><i></i></div>${img(t.shots[0][0],'main zoomable',t.shots[0][1])}</div>
-      <figcaption>${t.shots[0][1]}</figcaption>
-      ${t.shots.length > 1 ? `<div class="thumbs">${t.shots.map((s,j)=>`<button aria-current="${j===0}" data-k="${s[0]}" data-cap="${s[1].replace(/"/g,'&quot;')}">${img(s[0],'',s[1])}</button>`).join('')}</div>` : ''}
-    </figure>`;
-  }
-  const p = document.createElement('div');
-  p.className = 'panel' + (i === 0 ? ' on' : '');
-  p.innerHTML = `<div><p class="who">${t.who}</p><h3>${t.title}</h3>
-    <ul>${t.points.map(([b, r]) => `<li><b>${b}</b> ${r}</li>`).join('')}</ul></div>${right}`;
-  panels.appendChild(p);
-
-  p.querySelectorAll('.thumbs button').forEach((btn) => btn.onclick = () => {
-    const main = p.querySelector('.main');
-    main.src = `assets/shots/${btn.dataset.k}.webp`; main.dataset.cap = btn.dataset.cap; main.alt = btn.dataset.cap;
-    p.querySelector('figcaption').textContent = btn.dataset.cap;
-    p.querySelectorAll('.thumbs button').forEach((x) => x.setAttribute('aria-current', x === btn));
-  });
-});
-function select(i){
-  [...tabs.children].forEach((b, j) => b.setAttribute('aria-selected', i === j));
-  [...panels.children].forEach((p, j) => p.classList.toggle('on', i === j));
-}
-
-// Lightbox for any zoomable screen
-const lb = document.getElementById('lb');
-document.addEventListener('click', (e) => {
-  const z = e.target.closest('.zoomable');
-  if (z) { lb.querySelector('img').src = z.src; lb.querySelector('p').textContent = z.dataset.cap || ''; lb.classList.add('on'); }
-  else if (e.target.closest('#lb')) lb.classList.remove('on');
-});
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lb.classList.remove('on'); });
-
-// Only one video plays at a time
-document.querySelectorAll('video').forEach((v) => v.addEventListener('play', () =>
-  document.querySelectorAll('video').forEach((o) => o !== v && o.pause())));
-
-// Light / dark switch, remembered per browser
-const root = document.documentElement;
-try { const t = localStorage.getItem('ophia-theme'); if (t) root.dataset.theme = t; } catch {}
-document.getElementById('theme').onclick = () => {
-  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = dark ? 'light' : 'dark';
-  try { localStorage.setItem('ophia-theme', root.dataset.theme); } catch {}
-};
-</script>
+<script src="assets/js/site.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="assets/js/hero3d.js" defer></script>
+<script src="assets/js/home.js" defer></script>
+<script src="assets/js/journey.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,70 @@
+<!--
+title: Hosting and security — Ophia
+description: Run Ophia on the hospital's own server or in the cloud. How records are protected, checked and kept.
+nav: hosting
+scripts:
+-->
+<section class="page-head">
+  <div class="wrap">
+    <div class="head" style="margin-bottom:0">
+      <p class="label">Hosting &amp; security</p>
+      <h1>On your premises or in the cloud.</h1>
+      <p>The hospital chooses where its data lives. The software is the same either way, and staff use it in a web browser on desk computers and tablets, with nothing to install.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:56px">
+  <div class="wrap">
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01"/></svg></div>
+        <h3>On your premises</h3>
+        <p>Ophia runs on a server inside the hospital, and patient data never leaves the building.</p>
+        <ul><li>Backups to the hospital's own storage</li><li>Works across the hospital network even when the internet is down</li><li>Suits hospitals that want records on site</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 7.9H7z"/></svg></div>
+        <h3>In the cloud</h3>
+        <p>We run it for the hospital, so there is no server to buy or look after.</p>
+        <ul><li>Reachable from every branch</li><li>Updates without a site visit</li><li>Suits groups with several locations</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <h3>On any screen</h3>
+        <p>Staff sign in through a web browser on any desk computer or tablet. Patients use the app on their phones.</p>
+        <ul><li>Each role signs in to its own portal</li><li>Phones add photos of paper records by QR code</li><li>Built on Django, Next.js and PostgreSQL</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tint">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Security and safety</p>
+      <h2>Checks are built into the work, not left on a clipboard.</h2>
+    </div>
+    <div class="rules">
+      <div class="rule"><h3>Each role sees its own work</h3><p>Portals and permissions follow the job. Ward nurses can write the operative notes, but only the operating surgeon can change the case itself.</p></div>
+      <div class="rule"><h3>Records lock after their editing window</h3><p>Once the window closes, a clinical record can only be reopened by an administrator, who must give a reason.</p></div>
+      <div class="rule"><h3>Surgery waits for the checks</h3><p>The theatre checklist opens only after the ward checklist is signed, and a case without signed consent cannot start.</p></div>
+      <div class="rule"><h3>An audit trail of changes</h3><p>Changes to records are logged with who made them and when.</p></div>
+      <div class="rule"><h3>Phone links expire</h3><p>Each QR upload link belongs to one patient and lasts 15 minutes. Photos go into the record, not into a chat on a staff phone.</p></div>
+      <div class="rule"><h3>Patients see only what's released</h3><p>Reports reach the patient app only after the doctor has reviewed and released them, and family members need the patient's code.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap split">
+    <div class="window"><div class="bar"><i></i><i></i><i></i><span>/ot/case</span></div><div class="stack" data-zoom data-cap="A completed operative record, locked against later edits."><img class="on" src="assets/screens/theatre-operative-record.webp" alt="A locked operative record" loading="lazy"></div></div>
+    <div>
+      <div class="head" style="margin-bottom:0">
+        <p class="label">Your data stays yours</p>
+        <h2>A standard database, no lock-in.</h2>
+        <p>Ophia keeps its records in PostgreSQL, the widely used open-source database. The hospital can export its data at any time, without needing us to read it.</p>
+      </div>
+    </div>
+  </div>
+</section>

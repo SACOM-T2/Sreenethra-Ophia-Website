@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Patient app — Ophia</title>
+<meta name="description" content="The Ophia app lets patients book and pay, follow their visit, keep prescriptions and reports, and look after family members' records.">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+  // Theme and loader are set before first paint, so nothing flashes.
+  try {
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('is-loading');
+    var t = localStorage.getItem('ophia-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<div class="loader" aria-hidden="true">
+  <svg viewBox="0 0 120 120" class="loader-ring">
+    <defs>
+      <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#14d6e8"/><stop offset=".55" stop-color="#00c2c7"/><stop offset="1" stop-color="#0a74de"/>
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="60" r="42" fill="none" stroke="url(#ring-grad)" stroke-width="16" stroke-linecap="round" pathLength="100" stroke-dasharray="88 12"/>
+  </svg>
+  <span class="loader-word">Ophia</span>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/img/ophia-logo.png" alt="" width="30" height="30">Ophia</a>
+    <nav class="menu" id="menu" aria-label="Main">
+      <a href="product.html">Product</a>
+      <a href="patient-app.html" aria-current="page">Patient app</a>
+      <a href="why-ophia.html">Why Ophia</a>
+      <a href="hosting.html">Hosting &amp; security</a>
+    </nav>
+    <a class="btn small fill nav-cta" href="product.html#watch">Watch it run</a>
+    <button class="icon-btn" id="theme" aria-label="Switch between light and dark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-head">
+  <div class="wrap app-hero">
+    <div class="handset"><video src="assets/video/patientapp.mp4" poster="assets/video/patientapp.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Recording of the patient app"></video></div>
+    <div>
+      <div class="head" style="margin-bottom:8px">
+        <p class="label">Patient app</p>
+        <h1>The hospital, in the patient's pocket.</h1>
+        <p>The Ophia app is built on the same record the hospital uses. What the front desk books, the optometrist measures and the doctor prescribes is what the patient sees, with nothing typed twice.</p>
+      </div>
+      <ul class="ticks">
+        <li><span><b>Sign in with a mobile number</b> and a one-time code. No password to forget.</span></li>
+        <li><span><b>One number, the whole family:</b> parents look after their children's records, and adult children their parents'.</span></li>
+        <li><span><b>Available in English and Malayalam</b> for emergency guidance and eye-care guides.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Screens</p>
+      <h2>Every screen a patient uses.</h2>
+      <p>Scroll sideways through the app. Click a screen to see it full size.</p>
+    </div>
+    <div class="gallery-nav">
+      <button class="icon-btn" data-scroll="gallery" data-dir="-1" aria-label="Previous screens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="icon-btn" data-scroll="gallery" data-dir="1" aria-label="Next screens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="gallery" id="gallery">
+      <figure class="shot"><div class="handset" data-zoom data-cap="Home: everything the patient can do, one tap away."><img src="assets/screens/app-home.webp" alt="App home screen" loading="lazy"></div>
+        <figcaption><h3>Home</h3><p>Booking, today's visit, records and family in one place.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Booking: choose a service, a doctor and a slot."><img src="assets/screens/app-book.webp" alt="Booking a visit" loading="lazy"></div>
+        <figcaption><h3>Book a visit</h3><p>Pick a service and a doctor, then a free slot. Regular and express slots, with the fee shown up front.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Bookings with their payment and status."><img src="assets/screens/app-bookings.webp" alt="My bookings" loading="lazy"></div>
+        <figcaption><h3>Bookings and payments</h3><p>Pay online when booking, reschedule or cancel, and see refunds as they happen.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Today's visit: where the patient is and who is ahead of them."><img src="assets/screens/app-today.webp" alt="Today's visit" loading="lazy"></div>
+        <figcaption><h3>Today's visit</h3><p>The step they're at (check-in, refraction, the doctor) and how many patients are ahead.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Prescriptions with how to use each eye drop."><img src="assets/screens/app-prescriptions.webp" alt="Prescriptions" loading="lazy"></div>
+        <figcaption><h3>Prescriptions</h3><p>Every prescription with how to use each drop, past ones clearly marked, and a PDF to keep.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Reports appear once the doctor releases them."><img src="assets/screens/app-reports.webp" alt="Reports" loading="lazy"></div>
+        <figcaption><h3>Reports</h3><p>Scans and test reports appear once the doctor has reviewed and released them.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Visit history with diagnosis, advice and vision for each eye."><img src="assets/screens/app-visits.webp" alt="Visit history" loading="lazy"></div>
+        <figcaption><h3>Visit history</h3><p>Each visit's diagnosis, advice, follow-up date and spectacle power for both eyes.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Surgery history with care instructions."><img src="assets/screens/app-surgeries.webp" alt="Surgery history" loading="lazy"></div>
+        <figcaption><h3>Surgeries</h3><p>Past surgeries for each eye, with care guidance for before and after.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Family access: who can see this record."><img src="assets/screens/app-family.webp" alt="Family access" loading="lazy"></div>
+        <figcaption><h3>Family access</h3><p>Add a family member's record with a code sent to their phone. Their permission, given in seconds.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Eye-care guides, including eye-drop instructions."><img src="assets/screens/app-guides.webp" alt="Eye-care guides" loading="lazy"></div>
+        <figcaption><h3>Eye-care guides</h3><p>How to put in eye drops, and what to do before and after surgery.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Help and contacts for the hospital and each doctor's OPD."><img src="assets/screens/app-help.webp" alt="Help and contacts" loading="lazy"></div>
+        <figcaption><h3>Help and contacts</h3><p>The helpline and each doctor's OPD number, one tap to call.</p></figcaption></figure>
+      <figure class="shot"><div class="handset" data-zoom data-cap="Notifications about bookings, payments and records."><img src="assets/screens/app-notifications.webp" alt="Notifications" loading="lazy"></div>
+        <figcaption><h3>Notifications</h3><p>Booking confirmations, payment and refund updates, and follow-up reminders.</p></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec tint">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">For the hospital</p>
+      <h2>The app takes work off the front desk.</h2>
+    </div>
+    <div class="feats">
+      <div class="feat"><h3>Fewer phone calls</h3><p>Patients book, reschedule and check their place in the queue themselves.</p></div>
+      <div class="feat"><h3>Registration done before arrival</h3><p>New patients fill in their details at home; the desk checks and approves them in one step.</p></div>
+      <div class="feat"><h3>Payments reconciled</h3><p>Online payments are matched to bookings, with refunds tracked on the same screen.</p></div>
+      <div class="feat"><h3>Reports released by the doctor</h3><p>Nothing reaches the patient until the doctor has reviewed it, and overdue reports are flagged.</p></div>
+      <div class="feat"><h3>Corrections by request</h3><p>Patients ask for a change to their details, and the desk approves it before the record changes.</p></div>
+      <div class="feat"><h3>Follow-up reminders</h3><p>Patients are reminded when a follow-up is due, so fewer of them drop out of care.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap split">
+    <div class="window"><div class="bar"><i></i><i></i><i></i><span>/admin-patient</span></div><div class="stack" data-zoom data-cap="The desk's view of the patient app."><img class="on" src="assets/screens/patient-desk.webp" alt="Patient app staff desk" loading="lazy"></div></div>
+    <div>
+      <div class="head" style="margin-bottom:0">
+        <p class="label">The staff side</p>
+        <h2>One desk screen for everything patients do online.</h2>
+        <p>Pending registrations, corrections, family links, bookings, online payments and overdue reports, each with a count of what needs attention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html"><img src="assets/img/ophia-logo.png" alt="" width="24" height="24">Ophia</a>
+      <p>Software for eye hospitals.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="product.html">Product</a>
+      <a href="patient-app.html">Patient app</a>
+      <a href="why-ophia.html">Why Ophia</a>
+      <a href="hosting.html">Hosting &amp; security</a>
+    </nav>
+    <p class="small-print">The patients and staff shown in screenshots and recordings are fictional.</p>
+  </div>
+</footer>
+
+<div class="zoom" id="zoom" hidden role="dialog" aria-label="Enlarged screen"><img alt=""><p></p></div>
+
+<script src="assets/js/site.js" defer></script>
+
+</body>
+</html>

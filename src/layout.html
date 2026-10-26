@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+  // Theme and loader are set before first paint, so nothing flashes.
+  try {
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('is-loading');
+    var t = localStorage.getItem('ophia-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<div class="loader" aria-hidden="true">
+  <svg viewBox="0 0 120 120" class="loader-ring">
+    <defs>
+      <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#14d6e8"/><stop offset=".55" stop-color="#00c2c7"/><stop offset="1" stop-color="#0a74de"/>
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="60" r="42" fill="none" stroke="url(#ring-grad)" stroke-width="16" stroke-linecap="round" pathLength="100" stroke-dasharray="88 12"/>
+  </svg>
+  <span class="loader-word">Ophia</span>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/img/ophia-logo.png" alt="" width="30" height="30">Ophia</a>
+    <nav class="menu" id="menu" aria-label="Main">
+      <a href="product.html"{{current_product}}>Product</a>
+      <a href="patient-app.html"{{current_app}}>Patient app</a>
+      <a href="why-ophia.html"{{current_why}}>Why Ophia</a>
+      <a href="hosting.html"{{current_hosting}}>Hosting &amp; security</a>
+    </nav>
+    <a class="btn small fill nav-cta" href="product.html#watch">Watch it run</a>
+    <button class="icon-btn" id="theme" aria-label="Switch between light and dark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+{{content}}
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html"><img src="assets/img/ophia-logo.png" alt="" width="24" height="24">Ophia</a>
+      <p>Software for eye hospitals.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="product.html">Product</a>
+      <a href="patient-app.html">Patient app</a>
+      <a href="why-ophia.html">Why Ophia</a>
+      <a href="hosting.html">Hosting &amp; security</a>
+    </nav>
+    <p class="small-print">The patients and staff shown in screenshots and recordings are fictional.</p>
+  </div>
+</footer>
+
+<div class="zoom" id="zoom" hidden role="dialog" aria-label="Enlarged screen"><img alt=""><p></p></div>
+
+<script src="assets/js/site.js" defer></script>
+{{scripts}}
+</body>
+</html>
